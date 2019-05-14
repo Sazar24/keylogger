@@ -34,7 +34,7 @@ export default class HotkeysListener {
 
         ioHook.on("keypress", async (event: IKeyEvent) => {
             console.log("you pressed a key: " + JSON.stringify( event ));
-            strokesStore.captureKey(event);
+            strokesStore.captureKeyAndStorePackagesToFile(event);
         });
     }
 }

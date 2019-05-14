@@ -6,10 +6,9 @@ export default class Starter {
     
     run() {
         // this.enableHotkeys();
-        hotkeysListener.logEveryStroke();
-
-
+        hotkeysListener.logEveryStroke(); 
     }
+    
     // enableHotkeys() { }
 
     // toggleLoggerOn() {
