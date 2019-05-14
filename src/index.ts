@@ -1,7 +1,10 @@
-import Example from './services/someService.service';
+import Starter from './starter';
 
-const a:string = "31";
-console.log("kupax: " + a);
+// const a:string = "31";
+// console.log("kupax: " + a);
+// example.shouter();
+// const example: Example = new Example(); 
 
-const example: Example = new Example(); 
-example.shouter();
+const starter: Starter = new Starter();
+starter.run();
+
