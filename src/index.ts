@@ -7,4 +7,3 @@ import Starter from './starter';
 
 const starter: Starter = new Starter();
 starter.run();
-

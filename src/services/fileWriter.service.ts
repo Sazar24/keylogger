@@ -1,16 +1,21 @@
 // const fs = require('fs-extra')
 import * as fs from 'fs-extra';
 import IKeyEvent from './../types/keyEvent.interface';
+import RawCodeTranslator from './rawCodeTranslator.service';
+
+const rawCodeTranslator: RawCodeTranslator = new RawCodeTranslator();
 
 export default class FileWriter {
-    logPath: string = "./output/loggerTest.txt";
+    logPath: string = "./output/loggerTest";
+    extenstion: string = ".txt";
     fileWritesCounter: number = 0;
 
     saveLogs(keysLog: IKeyEvent[]) {
         console.log("attempting to write to the file");
         const dataToSafe: any = this.converArrayOfLogsToReadableText(keysLog);
+        const path: string = this.logPath + this.fileWritesCounter + this.extenstion;
 
-        fs.writeFile(this.logPath, dataToSafe, (err) => {
+        fs.writeFile(path, dataToSafe, (err) => {
             if (err) throw err;
             console.log('It\'s saved!');
         })
@@ -25,6 +30,7 @@ export default class FileWriter {
             const line: string = this.buildReadableLine(logItem);
             result += line;
         })
+        result = result + "\n+++\n~~All key strokes:\n" + rawCodeTranslator.translateAllChars(keysLog);
         return result;
     }
 
@@ -43,13 +49,9 @@ export default class FileWriter {
     }
 
     addCharAtLineBegining(text: string, originalKeyLog: IKeyEvent): string {
-        let result: string;
-        const originalKey_rawCode: number= originalKeyLog.rawcode;
-        const originalKey_asChar: string= YOU_ARE_HERE
+        const originalKeyAsChar: string = rawCodeTranslator.translateToChar(originalKeyLog.rawcode)
 
-
+        const result: string = originalKeyAsChar + " " + text;
         return result;
     }
-
-
 }
